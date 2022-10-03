@@ -1,0 +1,49 @@
+<div class="container__image">
+  <img src="assets/Logo.png" alt="Image of the logo" />
+</div>
+
+<div class="container-center">
+  <div class="container">
+    <h3 class="container__heading">Welcome!</h3>
+    <p
+      class="container__text"
+      [style]="!isFormValid ? 'color: red' : 'color: #000000;'"
+    >
+      {{ isFormValid ? "Sign in with:" : "Username or password is incorrect" }}
+    </p>
+    <form
+      class="container__form"
+      #authForm="ngForm"
+      (ngSubmit)="onSubmit(authForm)"
+    >
+      <input
+        type="text"
+        placeholder="Username"
+        class="container__form__input form-input"
+        name="username"
+        (input)="inputsValidation()"
+        [(ngModel)]="username"
+        required
+        minlength="5"
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        class="container__form__input form-input"
+        name="password"
+        (input)="inputsValidation()"
+        [(ngModel)]="password"
+        required
+        minlength="6"
+      />
+      <button
+        type="submit"
+        [disabled]="!inputsValid"
+        [style]="!inputsValid ? 'cursor: not-allowed' : 'cursor: pointer'"
+        class="container__form__input--button form-input"
+      >
+        Login
+      </button>
+    </form>
+  </div>
+</div>

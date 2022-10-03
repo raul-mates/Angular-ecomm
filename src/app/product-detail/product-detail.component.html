@@ -1,0 +1,116 @@
+<app-header></app-header>
+
+<div *ngIf="isDataLoaded" class="container">
+  <div class="container__title">
+    <h1 class="container__title--title">{{ product.title }}</h1>
+    <p class="container__title--code">Cod produs: {{ product.id }}</p>
+    <hr />
+  </div>
+  <div class="container__main">
+    <div class="container__main__images">
+      <div class="container__main__images__thumbnail">
+        <img
+          src="{{ product.image }}"
+          alt="{{ product.title }}"
+          class="container__main__images__thumbnail--image"
+        />
+      </div>
+      <div class="container__main__images__side-images">
+        <div
+          *ngFor="let sideImage of sideImages; let i = index"
+          [class]="i === 0 ? 'active' : ''"
+          class="container__main__images__side-images__side-image"
+          (click)="onChangeImage(f)"
+          #f
+        >
+          <img
+            src="{{ sideImage }}"
+            alt="{{ product.title }}"
+            class="container__main__images__side-images__side-image--image"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="container__main__description">
+      <div class="container__main__description__category">
+        <p class="container__main__description__category--word text-font-size">
+          Category:
+        </p>
+        <p
+          class="container__main__description__category--product-category text-font-size"
+        >
+          {{ product.category }}
+        </p>
+      </div>
+      <div class="container__main__description--flex">
+        <p class="text-font-size no-margin">Description:</p>
+        <p class="text-font-size no-margin padding-description">
+          {{ product.description }}
+        </p>
+      </div>
+    </div>
+    <div class="container__main__ternary">
+      <p class="container__main__ternary--price no-margin">
+        <span class="text-decoration">Price: </span>
+        {{ product.price }} &dollar;
+      </p>
+      <p class="container__main__ternary--rating no-margin">
+        <ion-icon
+          name="star-outline"
+          class="star-icon star-icon-rating"
+        ></ion-icon>
+        <ion-icon
+          name="star-outline"
+          class="star-icon star-icon-rating"
+        ></ion-icon>
+        <ion-icon
+          name="star-outline"
+          class="star-icon star-icon-rating"
+        ></ion-icon>
+        <ion-icon
+          name="star-outline"
+          class="star-icon star-icon-rating"
+        ></ion-icon>
+        <ion-icon
+          name="star-outline"
+          class="star-icon star-icon-rating"
+        ></ion-icon>
+        {{ product.rating.rate }}
+        ({{ product.rating.count }})
+      </p>
+      <div class="container__main__ternary__button">
+        <button
+          type="button"
+          class="button-height"
+          [className]="
+            !isInCart
+              ? 'container__main__ternary__button--add-to-cart button-height'
+              : 'container__main__ternary__button--remove-from-cart button-height'
+          "
+          (click)="onChangeCart()"
+        >
+          <div class="float-left">
+            <ion-icon name="cart-outline" class="float-left--icon"></ion-icon>
+          </div>
+          {{ isInCart ? "Remove from cart" : "Add to cart" }}
+        </button>
+        <button
+          type="button"
+          class="container__main__ternary__button--add-to-favourites button-height"
+        >
+          <div class="float-left">
+            <img src="assets/Heart.png" class="float-left--icon" />
+          </div>
+          Add to favourites
+        </button>
+      </div>
+    </div>
+  </div>
+  <h1 class="heading-similar-products">Similar products</h1>
+  <div class="container__similar-products">
+    <app-similar-product
+      *ngFor="let productByCategory of productsByCategory"
+      [productByCategory]="productByCategory"
+    ></app-similar-product>
+  </div>
+</div>

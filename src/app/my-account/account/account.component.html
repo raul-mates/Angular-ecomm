@@ -1,0 +1,168 @@
+<div class="containers__wrapper">
+  <div class="container__user-details account-container-commons">
+    <div>
+      <h1 class="container__user-details__title">Account details</h1>
+
+      <div class="container__user-details--wrapper">
+        <div class="container__user-details__user-img-container">
+          {{ userInitials }}
+          <div class="edit-photo-icon">
+            <ion-icon name="pencil-outline"></ion-icon>
+          </div>
+        </div>
+
+        <div class="container__user-details__user-info">
+          <div class="container__user-details__user-info__default-container">
+            <p
+              class="container__user-details__user-info__default-container--text"
+            >
+              Name:
+            </p>
+            <p
+              class="container__user-details__user-info__default-container--text"
+            >
+              Email:
+            </p>
+            <p
+              class="container__user-details__user-info__default-container--text"
+            >
+              Phone:
+            </p>
+            <p
+              class="container__user-details__user-info__default-container--text"
+            >
+              Username:
+            </p>
+          </div>
+
+          <div>
+            <p
+              class="container__user-details__user-info--data user-data user-data--name"
+            >
+              {{ firstName + " " + lastName }}
+            </p>
+            <p
+              class="container__user-details__user-info--data user-data user-data--email"
+            >
+              {{ email }}
+            </p>
+            <p
+              class="container__user-details__user-info--data user-data user-data--phone"
+            >
+              {{ phone }}
+            </p>
+            <p
+              class="container__user-details__user-info--data user-data user-data--username"
+            >
+              {{ username }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="container__user-details__user-info--address account-container-commons"
+  >
+    <h1 class="container__user-details__title">Address</h1>
+
+    <div
+      class="container__user-details--wrapper container__user-details--wrapper--address"
+    >
+      <div class="container__user-details__user-img-container">
+        <ion-icon name="map-outline" class="address-icon"></ion-icon>
+      </div>
+      <div class="container__user-details__user-info">
+        <div class="container__user-details__user-info__default-container">
+          <p
+            class="container__user-details__user-info__default-container--text"
+          >
+            City:
+          </p>
+          <p
+            class="container__user-details__user-info__default-container--text"
+          >
+            Street:
+          </p>
+          <p
+            class="container__user-details__user-info__default-container--text"
+          >
+            Number:
+          </p>
+          <p
+            class="container__user-details__user-info__default-container--text"
+          >
+            Zipcode:
+          </p>
+        </div>
+        <div>
+          <p
+            class="container__user-details__user-info--data user-data user-data--city"
+          >
+            {{ city }}
+          </p>
+          <p
+            class="container__user-details__user-info--data user-data user-data--street"
+          >
+            {{ street }}
+          </p>
+          <p
+            class="container__user-details__user-info--data user-data user-data--number"
+          >
+            {{ number }}
+          </p>
+          <p
+            class="container__user-details__user-info--data user-data user-data--zipcode"
+          >
+            {{ zipcode }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="thank-you__container account-container-commons">
+    <p class="thank-you__container--text">
+      Thank you for being our client for
+      {{ userId === 1 ? userId + " year" : userId + " years" }}!
+    </p>
+  </div>
+</div>
+
+<div class="container__account-mobile">
+  <div class="container__account-mobile__image-container">
+    <img
+      src="assets/73695.svg"
+      alt="Image of company logo"
+      class="container__account-mobile__image-container--image"
+    />
+  </div>
+
+  <div class="container__account-mobile__user-details">
+    <div class="container__user-details__user-img-container mobile-user-img">
+      {{ userInitials }}
+      <div class="edit-photo-icon">
+        <ion-icon name="pencil-outline"></ion-icon>
+      </div>
+    </div>
+    <p class="container__account-mobile__user-details--user-name">
+      {{ firstName + " " + lastName }}
+    </p>
+    <p class="container__account-mobile__user-details--email">{{ email }}</p>
+    <p class="container__account-mobile__user-details--thank-you">
+      eMag client for {{ userId }} year
+    </p>
+    <p class="container__account-mobile__user-details--phone">{{ phone }}</p>
+    <h3 class="container__account-mobile__user-details--address-text">
+      Address:
+    </h3>
+    <p class="container__account-mobile__user-details--address">
+      City: {{ city }}, Street: {{ street }}, No.{{ number }}
+    </p>
+
+    <p class="container__account-mobile__user-details--zipcode">
+      ZIP: {{ zipcode }}
+    </p>
+  </div>
+</div>

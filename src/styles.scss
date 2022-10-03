@@ -1,0 +1,33 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #f2f2f7;
+  box-sizing: border-box;
+  font-family: "Mukta";
+  color: #333;
+}
+
+.link:link,
+.link:visited {
+  color: #000;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.categories-modal-hidden {
+  display: none;
+}
+
+.ng-star-inserted {
+  z-index: 0;
+}

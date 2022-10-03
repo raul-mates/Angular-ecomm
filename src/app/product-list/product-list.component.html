@@ -1,0 +1,37 @@
+<app-header
+  style="position: relative; z-index: 2"
+  (userSearchTerm)="onSearchTermEntered($event)"
+  (userSelectedCategory)="onSelectedCategory($event)"
+></app-header>
+
+<app-slider></app-slider>
+
+<div class="container__sort-button">
+  <select
+    name="Sort by"
+    class="select"
+    value="Ascending"
+    (change)="onSort($event)"
+  >
+    <option class="select__option-zero">Sort By</option>
+    <option value="AscendingbyPrice" class="select__options">
+      Ascending by Price
+    </option>
+    <option value="DescendingbyPrice" class="select__options">
+      Descending by Price
+    </option>
+    <option value="AscendingbyName" class="select__options">
+      Name from A to Z
+    </option>
+    <option value="DescendingbyName" class="select__options">
+      Name from Z to A
+    </option>
+  </select>
+  <span class="custom-arrow"></span>
+</div>
+<div class="products">
+  <app-product-item
+    *ngFor="let product of products; let i = index"
+    [product]="product"
+  ></app-product-item>
+</div>

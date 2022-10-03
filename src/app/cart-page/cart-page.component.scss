@@ -1,0 +1,111 @@
+@import "/src/app/shared/mixins";
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .cart-empty {
+    height: 20rem;
+    display: flex;
+    align-items: center;
+    &--text {
+      font-weight: 700;
+      font-size: 4rem;
+      color: #ff373f;
+    }
+  }
+  &__main {
+    border: 1px solid #333;
+    max-width: 112.4rem;
+    max-height: 146.2rem;
+    padding: 11.8rem 24.9rem 30.8rem 23.5rem;
+    margin: 4.7rem 0;
+    &__total {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 2rem;
+      line-height: 3rem;
+      color: #ff373f;
+    }
+    &__button {
+      display: flex;
+      justify-content: flex-end;
+      &--payment {
+        width: 50%;
+        height: 4.1rem;
+        background: linear-gradient(90deg, #4a60c1 1.37%, #3985e0 100%);
+        color: #fff;
+        border: none;
+        position: relative;
+        overflow: hidden;
+        border-radius: 0.3rem;
+        cursor: pointer;
+        @include respond(small-cart-page) {
+          width: 100%;
+        }
+        &:hover {
+          background: linear-gradient(
+            90deg,
+            darken(#4a60c1, 5%) 1.37%,
+            darken(#3985e0, 5%) 100%
+          );
+        }
+        .float-left {
+          position: absolute;
+          background: linear-gradient(90deg, #d74151 6.12%, #ff363d 96.28%);
+          border-top-right-radius: 0% 0%;
+          border-bottom-right-radius: 37% 100%;
+          width: 7.4rem;
+          height: 100%;
+          left: 0;
+          top: 0;
+          &:hover {
+            background: linear-gradient(
+              90deg,
+              darken(#d74151, 5%) 6.12%,
+              darken(#ff363d, 5%) 96.28%
+            );
+          }
+          &--icon1,
+          &--icon2 {
+            position: absolute;
+            font-size: 3rem;
+            top: 15%;
+          }
+          &--icon1 {
+            left: 20%;
+          }
+          &--icon2 {
+            left: 35%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1070px) {
+  .container {
+    &__main {
+      padding: 11.8rem 15rem 30.8rem 15rem;
+      border: none;
+    }
+  }
+}
+
+@media (max-width: 880px) {
+  .container {
+    &__main {
+      padding: 11.8rem 5rem 30.8rem 5rem;
+    }
+  }
+}
+
+@media (max-width: 750px) {
+  .container {
+    &__main {
+      padding: 11.8rem 1rem 30.8rem 1rem;
+    }
+  }
+}

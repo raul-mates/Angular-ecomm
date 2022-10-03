@@ -1,0 +1,71 @@
+<div class="container__item">
+  <div class="container__item__image">
+    <img
+      src="{{ productInCart.image }}"
+      alt="{{ productInCart.title }}"
+      class="container__item__image--img"
+    />
+  </div>
+  <div class="container__item__description">
+    <h3 class="container__item__description--title no-margin">
+      {{ productInCart.title }}
+    </h3>
+    <p class="container__item__description--price no-margin">
+      <span class="container__item__description--price-word">Price: </span>
+      <span class="container__item__description--price-value"
+        >{{ itemTotalPrice.toLocaleString("en-US") }} &dollar;</span
+      >
+    </p>
+    <div class="container__item__description__quantity">
+      <div class="container__item__description__quantity__field">
+        <button
+          class="container__item__description__quantity__field--minus no-margin"
+          (click)="onLowerQuantity(inputQuantity)"
+        >
+          <ion-icon
+            name="remove-circle"
+            class="container__item__description__quantity__field--minus-icon"
+          ></ion-icon>
+        </button>
+        <input
+          type="number"
+          class="container__item__description__quantity__field--input"
+          min="0"
+          max="5"
+          [defaultValue]="1"
+          readonly
+          #inputQuantity
+        />
+        <button
+          class="container__item__description__quantity__field--plus no-margin"
+          (click)="onRaiseQuantity(inputQuantity)"
+        >
+          <ion-icon
+            name="add-circle"
+            class="container__item__description__quantity__field--plus-icon"
+          ></ion-icon>
+        </button>
+      </div>
+      <button
+        class="container__item__description__quantity--remove"
+        type="button"
+        (click)="onRemoveFromCart()"
+      >
+        <ion-icon
+          name="trash-outline"
+          class="container__item__description__quantity--remove-icon"
+        ></ion-icon>
+      </button>
+    </div>
+    <p
+      [ngClass]="{ visible: quantity === 5 || quantity === 1 }"
+      [className]="quantity === 1 ? 'min-quantity' : 'max-quantity'"
+    >
+      {{
+        quantity === 5
+          ? "You have reached the maximum quantity!"
+          : "You are at the minimum quantity!"
+      }}
+    </p>
+  </div>
+</div>

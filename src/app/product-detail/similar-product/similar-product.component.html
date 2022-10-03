@@ -1,0 +1,26 @@
+<div class="container" (click)="onChangeProduct()">
+  <div class="container-image">
+    <img
+      [src]="productByCategory.image"
+      alt="{{ productByCategory.title }}"
+      class="container-image__img"
+    />
+  </div>
+  <div class="container-description">
+    <h3 class="container-description__title">
+      {{ productByCategory.title }}
+    </h3>
+    <p class="container-description__price">
+      <span class="text-decoration">Price:</span>
+      <span> {{ productByCategory.price }} &dollar; </span>
+    </p>
+    <p class="container-description__rating">
+      <span class="text-decoration">Rating:</span>
+      <span>
+        {{ productByCategory.rating.rate }}
+        <ion-icon name="star" class="star-icon"></ion-icon>
+        ( {{ productByCategory.rating.count }} )
+      </span>
+    </p>
+  </div>
+</div>

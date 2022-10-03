@@ -1,0 +1,82 @@
+<div class="main-container-wrapper">
+  <p *ngIf="previousOrders.length === 0" class="no-orders-message">
+    You have no previously placed orders!
+  </p>
+
+  <div
+    *ngIf="previousOrders.length > 0"
+    class="container__previous-orders__main"
+  >
+    <div class="container__previous-orders">
+      <div
+        class="container_previous-orders__cart-container"
+        *ngFor="let order of previousOrders"
+      >
+        <div class="container_previous-orders__cart-container__order-data">
+          <h1
+            class="container_previous-orders__cart-container__order-data--date"
+          >
+            Order placed on {{ order.date | date: "shortDate" }} at
+            {{ order.date | date: "shortTime" }}
+          </h1>
+          <p class="container_previous-orders__cart-container__order-data--id">
+            Order id: {{ order.id }}
+          </p>
+        </div>
+
+        <div
+          class="container_previous-orders__cart-container__order-details__wrapper"
+          #detailsWrapper
+        >
+          <div
+            *ngFor="let product of order.products"
+            class="container_previous-orders__cart-container__order-details"
+          >
+            <p
+              class="container_previous-orders__cart-container__order-details--title"
+            >
+              {{ product.title }}
+            </p>
+            <p
+              class="container_previous-orders__cart-container__order-details--quantity"
+            >
+              Quantity:
+              {{
+                product.quantity === 1
+                  ? product.quantity + " pc."
+                  : product.quantity + " pcs."
+              }}
+            </p>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          (click)="
+            onExpandButtonClicked(
+              detailsWrapper,
+              expandButtonChevron1,
+              expandButtonChevron2
+            )
+          "
+          #expandButton
+          class="container_previous-orders__cart-container__order-details__expand-button"
+        >
+          Details
+          <div class="button-vector">
+            <ion-icon
+              name="chevron-down-outline"
+              #expandButtonChevron1
+              class="chevron-down-icon chevron-down-icon--1"
+            ></ion-icon>
+            <ion-icon
+              #expandButtonChevron2
+              name="chevron-down-outline"
+              class="chevron-down-icon chevron-down-icon--2"
+            ></ion-icon>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

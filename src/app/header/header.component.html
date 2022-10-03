@@ -1,0 +1,405 @@
+<nav class="navigation" (window:resize)="onResize($event)">
+  <div
+    #burgerMenuIcon
+    class="burger-menu-mobile"
+    (click)="
+      onMobileBurgerMenuClicked(
+        burgerMenuModal,
+        categoriesModal,
+        burgerMenuIcon,
+        top,
+        middle,
+        bottom
+      )
+    "
+  >
+    <div class="burger-menu-mobile__top-line" #top></div>
+    <div class="burger-menu-mobile__middle-line" #middle></div>
+    <div class="burger-menu-mobile__bottom-line" #bottom></div>
+  </div>
+  <div
+    class="categories-modal categories-modal-hidden"
+    #categoriesModal
+    (click)="
+      onMobileModalClicked(
+        categoriesModal,
+        burgerMenuIcon,
+        burgerMenuModal,
+        top,
+        middle,
+        bottom
+      )
+    "
+  ></div>
+  <p class="search-back-to-store hidden" #backToStore>
+    <ion-icon
+      name="arrow-back-outline"
+      class="search-back-to-store__arrow-back-icon"
+    ></ion-icon>
+    Back to store
+  </p>
+  <div class="categories-mobile-dropdown hidden" #burgerMenuModal>
+    <ul class="categories-mobile-dropdown__list">
+      <li
+        class="categories-mobile-dropdown__list__item"
+        *ngFor="let category of productCategories"
+        (click)="
+          showProductsInCategory(
+            $event,
+            category,
+            categoriesModal,
+            burgerMenuIcon,
+            burgerMenuModal,
+            top,
+            middle,
+            bottom
+          )
+        "
+      >
+        {{ category.replace(category[0], category[0].toUpperCase()) }}
+        <ion-icon
+          name="chevron-forward-outline"
+          class="forward-icon"
+        ></ion-icon>
+      </li>
+    </ul>
+  </div>
+  <div class="navigation__primary-container">
+    <div class="navigation__primary-container__mobile-border"></div>
+    <div class="navigation__primary-container__items-container">
+      <img
+        src="assets/Logo.svg"
+        alt="Image of the logo"
+        class="navigation__primary-container__items-container--img"
+      />
+      <div class="inputs-container" #inputsContainer>
+        <div
+          #container
+          [ngClass]="
+            windowWidth < 1186 ? 'border-helper-mobile' : 'border-helper'
+          "
+          class="inputs-container__drop-down"
+        >
+          <input
+            type="text"
+            (input)="onSearchInput($event, close)"
+            (focusout)="
+              onOutOfFocus(
+                inputValue,
+                dropDown,
+                close,
+                inputsContainer,
+                burgerMenuIcon,
+                backToStore
+              )
+            "
+            (focus)="
+              onFocus(inputValue, dropDown, close, burgerMenuIcon, backToStore)
+            "
+            (keydown.enter)="
+              showAllContaining(inputValue, dropDown, inputsContainer)
+            "
+            (keyup.escape)="
+              showAllContaining(inputValue, dropDown, inputsContainer)
+            "
+            placeholder="Start a new search"
+            #inputValue
+            class="navigation__primary-container__items-container--input inputs-container__drop-down__input"
+          />
+
+          <button
+            [ngClass]="{ hidden: !isCloseVisible }"
+            class="inputs-container__drop-down__button-close"
+            #close
+            (mousedown)="onClose(inputValue, dropDown)"
+          >
+            <img
+              src="assets/CLOSE.png"
+              style="width: 2.5rem; height: 2.5rem"
+              alt="Close button"
+            />
+          </button>
+
+          <button
+            class="inputs-container__drop-down__button-search"
+            (click)="showAllContaining(inputValue, dropDown, inputsContainer)"
+          >
+            <ion-icon name="search-outline" class="search-icon"></ion-icon>
+          </button>
+
+          <ul
+            #dropDown
+            class="inputs-container__drop-down__list"
+            [style]="isSearchInputValid ? 'display: block' : 'display: none'"
+          >
+            <p class="link" *ngIf="filteredProducts.length === 0">
+              No matching product found!
+            </p>
+            <a
+              [routerLink]="'/product-detail-page/' + filteredProduct.id"
+              class="link"
+              *ngFor="let filteredProduct of filteredProducts | slice: 0:5"
+              ><ion-icon
+                name="search-outline"
+                class="search-icon-product"
+              ></ion-icon>
+              {{ filteredProduct.title }}</a
+            >
+            <a
+              *ngIf="filteredProducts.length !== 0"
+              class="show-all-containing"
+              (mousedown)="
+                showAllContaining(inputValue, dropDown, inputsContainer)
+              "
+              ><ion-icon
+                name="search-outline"
+                class="search-icon-product"
+              ></ion-icon>
+              <span>Show all containing</span> {{ userInputValue }}</a
+            >
+          </ul>
+        </div>
+      </div>
+      <div class="search-backdrop" #searchModal></div>
+
+      <div class="container__user-mobile">
+        <a
+          (click)="
+            onMobileSearchClicked(
+              inputsContainer,
+              inputValue,
+              searchModal,
+              backToStore
+            )
+          "
+          ><ion-icon name="search-outline" class="mobile-search-icon"></ion-icon
+        ></a>
+        <a [routerLink]="'/my-account/' + activeUserId + '/account-details'"
+          ><ion-icon name="person-outline" class="my-account-icon"></ion-icon
+        ></a>
+        <a class="container__user-mobile__cart-button"
+          ><ion-icon name="cart-outline" class="shopping-cart-icon"></ion-icon>
+          <div
+            class="navigation__primary-container__items-container__user-container--cart__notification"
+          >
+            {{ productsForCart.length }}
+          </div></a
+        >
+      </div>
+      <div
+        class="navigation__primary-container__items-container__user-container"
+      >
+        <a
+          style="cursor: pointer"
+          class="navigation__primary-container__items-container__user-container--account link"
+          (mouseover)="onMouseOverAccount(accountContainer)"
+          (mouseleave)="onMouseLeaveAccount(accountContainer)"
+          ><ion-icon name="person-outline" class="my-account-icon"></ion-icon>
+          Account
+          <ion-icon name="caret-down-outline" class="caret-down-icon"></ion-icon
+        ></a>
+        <a
+          style="cursor: pointer"
+          (mouseover)="onMouseOverCart(cartContainer)"
+          (mouseleave)="onMouseLeaveCart(cartContainer)"
+          class="navigation__primary-container__items-container__user-container--cart link"
+          ><ion-icon name="cart-outline" class="shopping-cart-icon"></ion-icon>
+          My Cart
+          <ion-icon
+            name="caret-down-outline"
+            class="caret-down-icon"
+          ></ion-icon>
+          <div
+            *ngIf="productsForCart.length > 0"
+            class="navigation__primary-container__items-container__user-container--cart__notification"
+          >
+            {{ productsForCart.length }}
+          </div>
+        </a>
+
+        <div
+          class="container__cart"
+          #cartContainer
+          (mouseover)="onMouseOverCart(cartContainer)"
+          (mouseleave)="onMouseLeaveCart(cartContainer)"
+        >
+          <h3 class="container__cart__title">
+            LATEST PRODUCTS
+            <div class="cart-vector"></div>
+          </h3>
+
+          <a
+            [routerLink]="'/product-detail-page/' + product.id"
+            *ngFor="let product of productsForCart; let i = index"
+            class="container__cart__product link"
+          >
+            <div class="container__cart__list">
+              <div class="container__cart__list__img-wrapper">
+                <div class="container__cart__list__item">
+                  <img
+                    [src]="product.image"
+                    class="container__cart__list__item--img"
+                    alt=""
+                  />
+                </div>
+                <div class="container__cart__list__details-wrapper">
+                  <div class="container__cart__list__item">
+                    <h2 class="container__cart__list__item--title">
+                      {{ product.title }}
+                    </h2>
+                  </div>
+                  <div class="container__cart__list__item">
+                    <p class="container__cart__list__item--brand">
+                      {{ product.category }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="container__cart__list__item">
+                <p class="container__cart__list__item--price">
+                  {{ product.price }}$
+                </p>
+              </div>
+            </div>
+          </a>
+
+          <div class="container__cart__total-wrapper">
+            <p class="container__cart__total-wrapper--text">
+              <strong>Total:</strong>
+              {{
+                cartTotal === 1
+                  ? cartTotal + " product"
+                  : cartTotal + " products"
+              }}
+            </p>
+            <p class="container__cart__total-wrapper--price">
+              {{ cartTotalPrice.toFixed(2) }}$
+            </p>
+          </div>
+          <div class="container__cart__button-wrapper" routerLink="/cart-page">
+            <button type="button" class="container__cart__button">
+              go to cart
+              <div class="button-default-extension">
+                <img src="assets/Vector 1.svg" alt="" />
+                <div class="chevron-forward-container">
+                  <ion-icon
+                    name="chevron-forward-outline"
+                    class="chevron-icon-1"
+                  ></ion-icon>
+                  <ion-icon
+                    name="chevron-forward-outline"
+                    class="chevron-icon-2"
+                  ></ion-icon>
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <div
+          class="container__account"
+          #accountContainer
+          (mouseover)="onMouseOverAccount(accountContainer)"
+          (mouseleave)="onMouseLeaveAccount(accountContainer)"
+        >
+          <p class="container__account__firstname">
+            <strong>
+              Greetings
+              {{ userFirstname }}!
+            </strong>
+          </p>
+          <a
+            [routerLink]="'/my-account/' + activeUserId + '/order-history'"
+            class="container__account__order-history link account-link"
+            ><span
+              ><ion-icon name="newspaper" class="account-icon"></ion-icon> Order
+              History</span
+            ></a
+          >
+          <a
+            [routerLink]="'/my-account/' + activeUserId + '/account-details'"
+            class="container__account__account-details link account-link"
+            ><span
+              ><ion-icon name="person" class="account-icon"></ion-icon> Account
+              Details</span
+            ></a
+          >
+          <div class="wrapper__logout-button">
+            <button
+              style="cursor: pointer"
+              type="button"
+              class="container__account__logout-button"
+              (click)="onLogout()"
+            >
+              Logout
+              <div class="account-vector"></div>
+              <ion-icon
+                name="log-out-outline"
+                style="
+                  color: #fff;
+                  font-size: 1.8rem;
+                  position: absolute;
+                  top: 50%;
+                  right: 20%;
+                  transform: translate(-50%, -25%);
+                "
+              ></ion-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="navigation__secondary-container">
+    <div class="navigation__secondary-container__items-container">
+      <a
+        style="cursor: pointer"
+        class="navigation__secondary-container__items-container__dropdown-button link"
+      >
+        <div class="container__burger-menu">
+          <div class="container__burger-menu--top burger-menu-defaults"></div>
+          <div
+            class="container__burger-menu--middle burger-menu-defaults"
+          ></div>
+          <div
+            class="container__burger-menu--bottom burger-menu-defaults"
+          ></div>
+        </div>
+        <p
+          class="navigation__secondary-container__items-container__dropdown-button--products"
+        >
+          Products
+        </p>
+        <div class="dropdown-menu-content">
+          <ul class="dropdown-menu-content__list">
+            <li
+              class="dropdown-menu-content__list__item"
+              *ngFor="let category of productCategories"
+              (click)="
+                showProductsInCategory(
+                  $event,
+                  category,
+                  categoriesModal,
+                  burgerMenuIcon,
+                  burgerMenuModal,
+                  top,
+                  middle,
+                  bottom
+                )
+              "
+            >
+              <a class="link"
+                >{{ category.replace(category[0], category[0].toUpperCase()) }}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </a>
+      <a
+        [routerLink]="'/my-account/' + activeUserId + '/account-details'"
+        class="navigation__secondary-container__items-container--account link"
+        >Account</a
+      >
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,66 @@
+.container__sort-button {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 5rem;
+  position: relative;
+  .select {
+    font-size: 1.5rem;
+    padding: 1rem 3rem 1rem 1.5rem;
+    font-family: "Libre Baskerville", sans-serif;
+    background-color: #f2f2f7;
+    border: none;
+    cursor: pointer;
+    &__option-zero {
+      text-align: end;
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+  .custom-arrow {
+    position: absolute;
+    display: block;
+    top: 0;
+    right: 0;
+    background: #f2f2f7;
+    height: 100%;
+    width: 4rem;
+    pointer-events: none;
+    &::before,
+    &::after {
+      --size: 0.65rem;
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    &::before {
+      border-left: var(--size) solid transparent;
+      border-right: var(--size) solid transparent;
+      border-bottom: var(--size) solid rgba(0, 0, 0, 0.3);
+      top: 40%;
+    }
+    &::after {
+      border-left: var(--size) solid transparent;
+      border-right: var(--size) solid transparent;
+      border-top: var(--size) solid rgba(0, 0, 0, 0.3);
+      top: 60%;
+    }
+  }
+}
+
+.products {
+  padding: 3.8rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5rem;
+}
+
+@media (max-width: 950px) {
+  .products {
+    justify-content: space-around;
+  }
+}

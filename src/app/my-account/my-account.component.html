@@ -1,0 +1,24 @@
+<app-header></app-header>
+<div class="container__my-account-main">
+  <div class="container__my-account-main__left">
+    <p
+      routerLink="account-details"
+      routerLinkActive="selected"
+      class="container__my-account-main__left--button container__my-account-main__left__account"
+    >
+      Account Details
+    </p>
+    <p
+      routerLink="order-history"
+      routerLinkActive="selected"
+      class="container__my-account-main__left--button container__my-account-main__left__order-history"
+    >
+      Order History
+    </p>
+  </div>
+  <div class="container__my-account-main__right">
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

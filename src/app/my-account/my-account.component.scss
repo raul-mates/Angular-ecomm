@@ -1,0 +1,71 @@
+@import "/src/app/shared/mixins";
+
+.container__my-account-main {
+  display: flex;
+  color: #333;
+  justify-content: center;
+  padding: 5rem;
+
+  @include respond(tab-port) {
+    padding: 0;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  &__left {
+    font-size: 2.4rem;
+    background-color: #fff;
+    box-shadow: 2px 7px 27px rgba(0, 0, 0, 0.08);
+    height: fit-content;
+    width: fit-content;
+    margin-right: 10px;
+    @include respond(tab-port) {
+      display: flex;
+    }
+
+    @include respond(phone) {
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+    }
+
+    @include respond(small-phone) {
+      flex-direction: column;
+    }
+
+    &--button {
+      padding: 2rem 4rem;
+      margin: 0;
+      cursor: pointer;
+      white-space: nowrap;
+      border-bottom: 1px solid #e9ecef;
+
+      @include respond(phone) {
+        text-align: center;
+        padding-left: 0;
+        padding-right: 0;
+        width: 100%;
+      }
+
+      &:hover {
+        background-color: #f2f9ff;
+        color: #0082e6;
+      }
+    }
+  }
+
+  &__right {
+    background-color: #f2f2f7;
+    display: flex;
+
+    @include respond(tab-port) {
+      width: fit-content;
+    }
+  }
+}
+
+.selected {
+  background-color: #f2f9ff;
+  color: #0082e6;
+}

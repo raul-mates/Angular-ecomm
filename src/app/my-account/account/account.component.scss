@@ -1,0 +1,218 @@
+@import "/src/app/shared/mixins";
+
+.containers__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  border-radius: 3px;
+  flex: 1 1 0;
+  gap: 1rem;
+
+  @include respond(tab-port) {
+    display: none;
+  }
+}
+
+.container__user-details {
+  &--wrapper {
+    display: flex;
+    align-items: center;
+    gap: 7rem;
+    flex: 1 1 0;
+  }
+
+  &__title {
+    margin: 0;
+    font-weight: 400;
+  }
+
+  &__user-info {
+    font-size: 1.6rem;
+    display: flex;
+    gap: 6rem;
+  }
+
+  &__user-img-container {
+    position: relative;
+    background-image: linear-gradient(to bottom right, #a0328c, #4359c7);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 10rem;
+    height: 10rem;
+    font-size: 3.2rem;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+}
+
+.edit-photo-icon {
+  position: absolute;
+  bottom: 3px;
+  right: 3px;
+  background-color: #fffefb;
+  border-radius: 50%;
+  padding: 6px;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #005eb8;
+  box-shadow: 1px 1px 5px 1px rgb(0 0 0 / 20%);
+}
+
+.address-icon {
+  font-size: 4.2rem;
+}
+
+.thank-you__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: default;
+
+  &--text {
+    width: 30rem;
+    padding: 1rem 2rem;
+    font-size: 3.2rem;
+    margin: 0;
+    background-image: linear-gradient(
+      90deg,
+      #ff1d25 2.6%,
+      #a0328c 20.26%,
+      #7040a4 40.63%,
+      #4359c7 59.37%,
+      #0082e6 82.29%
+    );
+    text-align: center;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    border: 5px solid;
+    border-image-slice: 1;
+    border-width: 2.5px;
+    border-image-source: linear-gradient(
+      90deg,
+      #ff1d25 2.6%,
+      #a0328c 20.26%,
+      #7040a4 40.63%,
+      #4359c7 59.37%,
+      #0082e6 82.29%
+    );
+  }
+}
+
+.user-data {
+  overflow: hidden;
+  &--name {
+    text-transform: capitalize;
+  }
+
+  &--city {
+    text-transform: capitalize;
+  }
+
+  &--street {
+    text-transform: capitalize;
+  }
+
+  &--zipcode {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+.account-container-commons {
+  padding: 2rem 4rem;
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 2px 7px 27px rgba(0, 0, 0, 0.08);
+  flex: 1 1 0;
+}
+
+////// Mobile ///////
+
+.container__account-mobile {
+  display: none;
+  @include respond(tab-port) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    text-align: center;
+    flex: 1 1 0;
+  }
+
+  &__user-details {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #fff;
+    font-size: 1.4rem;
+    padding-top: 35px;
+    width: 100%;
+    height: 34rem;
+
+    box-shadow: 0 2px 12px -4px rgb(0 0 0 / 10%);
+
+    &--user-name {
+      text-transform: capitalize;
+      margin-top: 2rem;
+      font-size: 1.6rem;
+      margin-bottom: 5px;
+    }
+
+    &--email {
+      font-weight: 600;
+      text-decoration: underline;
+      color: #005eb8;
+      margin-top: 5px;
+    }
+
+    &--thank-you {
+      opacity: 0.8;
+      margin-top: 5px;
+    }
+
+    &--address-text {
+      font-weight: 400;
+    }
+
+    &--address {
+      margin-top: 5px;
+      text-transform: capitalize;
+    }
+  }
+
+  &__image-container {
+    position: relative;
+    // top: -110px;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    background-color: #fff;
+    width: 100vw;
+    padding-top: 78px;
+    overflow: hidden;
+
+    &--image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding-bottom: 0;
+      transform: scale(1.3);
+    }
+  }
+}
+
+.mobile-user-img {
+  position: absolute;
+  top: -53px;
+}
